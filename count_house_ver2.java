@@ -17,7 +17,7 @@ public class count_house_ver2 {
 		Scanner sc = new Scanner(System.in);
 		T = sc.nextInt();//Number of testcase
 		
-		for ( int t =1; t<= 1; t++) {
+		for ( int t =1; t<= T; t++) {
 			int total_H = 0;
 			//read data from input.txt
 			size = sc.nextInt();
@@ -32,79 +32,202 @@ public class count_house_ver2 {
 			//count House
 			for (int i = 0; i < size; i++) {
 				for (int j = 0; j < size; j++) {
-					if (data[i][j].equals("H")) total_H++;
+					//if (data[i][j].equals("H")) total_H++;
 				
-					if ((data[i][j] != null) & (data[i][j].equals("H"))){
+					if ((data[i][j].equals("H"))){
 						//System.out.println(total_H);
 						
 						//Cell A
 						if ( (i-1) >= 0) {
 							if ( data[i-1][j].equals("A")){
-							total_H --;}
+								continue;
+							//total_H --;
+							//break;
+							
+							}
 						}
 						if ( (i+1) < size ){
 							if ( data[i+1][j].equals("A")) {
-							total_H --;}
+								continue;
+								//total_H --;
+								//break;
+							}
 						}
 						if ( (j-1) >= 0 ) {
 							if ( data[i][j-1].equals("A")){
-							total_H --;}
+								continue;
+								//total_H --;
+								//break;
+							}
 						}
 						if ( (j+1) <size){ 
-								if (data[i][j+1].equals("A")){
-							
-									total_H --;}
+							if (data[i][j+1].equals("A")){
+								continue;
+								//total_H --;
+								//break;
+							}
 						}
 						
 						
 						//cell B
+						if ( (i-1) >= 0) {
+							if ( data[i-1][j].equals("B")){
+								continue;
+							//total_H --;
+							//break;
+							
+							}
+						}
+						if ( (i+1) < size ){
+							if ( data[i+1][j].equals("B")) {
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (j-1) >= 0 ) {
+							if ( data[i][j-1].equals("B")){
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (j+1) <size){ 
+							if (data[i][j+1].equals("B")){
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						
 						if ( (i-2) >= 0) {
 							if (data[i-2][j].equals("B")) {
-							total_H --;}
+								continue;
+								//total_H --;
+								//break;
+							}
 						}
-						if ( (i+2) <(size -2)){
+						if ( (i+2) <(size -1)){
 							if ( data[i+2][j].equals("B")){
-							total_H --;}
+								continue;
+								//total_H --;
+								//break;
+							}
 						}
 						if ( (j-2) >= 0) {
 							if ( data[i][j-2].equals("B")) {
-								total_H --;
+								continue;
+								//total_H --;
+								//break;
 							}
 						}
-						if ( (j+2) <= (size -2)){
+						if ( (j+2) <= (size -1)){
 							if ( data[i][j+2].equals("B")) {
-								total_H --;
+								continue;
+								//total_H --;
+								//break;
 							}
 						}
 						
 						
 						//cell C
-						if ( (i-3) >= 0 ) {
-							if ( data[i-3][j].equals("C")) {
-								total_H --;
+						if ( (i-1) >= 0) {
+							if ( data[i-1][j].equals("C")){
+								continue;
+							//total_H --;
+							//break;
+							
 							}
 						}
-						if ( (i+3) <size-3){
+						if ( (i+1) < size ){
+							if ( data[i+1][j].equals("C")) {
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (j-1) >= 0 ) {
+							if ( data[i][j-1].equals("C")){
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (j+1) <size){ 
+							if (data[i][j+1].equals("C")){
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						
+						if ( (i-2) >= 0) {
+							if (data[i-2][j].equals("C")) {
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (i+2) <(size -1)){
+							if ( data[i+2][j].equals("C")){
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (j-2) >= 0) {
+							if ( data[i][j-2].equals("C")) {
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (j+2) <= (size -1)){
+							if ( data[i][j+2].equals("C")) {
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						
+						if ( (i-3) >= 0 ) {
+							if ( data[i-3][j].equals("C")) {
+								continue;
+								//total_H --;
+								//break;
+							}
+						}
+						if ( (i+3) <size-1){
 							if ( data[i+3][j].equals("C")) {
-								total_H --;
+								continue;
+								//total_H --;
+								//break;
 							}
 						}
 						if ( (j-3) >= 0) {
 							if ( data[i][j-3].equals("C")) {
-								total_H --;
+								continue;
+								//total_H --;
+								//break;
 							}
 						}
-						if ( (j+3) <size-3){
+						if ( (j+3) <size-1){
 							if ( data[i][j+3].equals("C")) {
-								total_H --;
+								continue;
+								//total_H --;
+								//break;
 							}
 							
 						}
+						total_H++;
+						data[i][j] = "X";
 					}
+					//System.out.println(data[i][j]);
 				}
+				
 			}
 		
-			System.out.println("TotalH: " +total_H);
+			//System.out.println("TotalH: " +total_H);
 			System.out.println("#" + t + " " + total_H);
 		}
 
