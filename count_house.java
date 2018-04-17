@@ -1,145 +1,127 @@
+package com.example.demo;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+public class Count {
 
-public class count_house {
 	static int T;
 	static final int max = 50;
 	static String[][] data = new String[max][max];
-	
+
 	public static void main(String[] args) throws FileNotFoundException {
-		// TODO Auto-generated method stub
-		int result = 0;
 		int size;
-		
+
 		System.setIn(new FileInputStream("res/input.txt"));
 		Scanner sc = new Scanner(System.in);
 		T = sc.nextInt();
-		
-		for ( int t =1; t<= 1; t++) {
-			int near = 0;
-			int total_H = 0;
-			//read data from input.txt
+
+		for (int t = 1; t <= T; t++) {
+			// read data from input.txt
 			size = sc.nextInt();
 			for (int i = 0; i < size; i++) {
-				for (int j = 0; j<size; j++) {
-					data[i][j]= sc.next();
+				for (int j = 0; j < size; j++) {
+					data[i][j] = sc.next();
 				}
-				
+
 			}
-			
-			//count House
+
+			// count House
+			// Idea is that
+			// When get a X => Ignore
+			// When get a house => save it
+			// When get an A => Remove all house near it by 1
+			// When get a B => Remove all house near it by 2
+			// When get a C => Remove all house near it by 3
+			// Because it is possible that the item could be removed before
+			// adding
+			// ex H A H
+			// x H -> This will be removed before adding because the way we loop
+			// the matrix
+			// In this case, to make it simple we do 2 loops
+			// First loop is used to get all H
+			// Second loop is used to get A/ B / C
+
+			// The remain H is size of collection
+
+			// About Data structure
+			// It has to save the row and column
+			// It has to check one item is contained so it can be removed
+			// => Could create a Point(x,y) but
+			// It could be use by a Map<x, y> with x is key, y is value
+
+			// First loop to collect house
+			Map<Integer, Integer> foundMap = new HashMap<>();
 			for (int i = 0; i < size; i++) {
 				for (int j = 0; j < size; j++) {
-					
-					//if (data[i][j] == "X") continue;
-					
-					if (data[i][j] == "H"){
-						total_H ++;
-						System.out.println(total_H);
+					// NOTE: Require Java7 or higher
+					switch (data[i][j]) {
+					case "H":
+						foundMap.put(i, j);
+						break;
 					}
-					//System.out.println(data[i][j]);
-					
-					//cell A
-					if (data[i][j] == "A") {
-						if ( (i-1) >= 0 && data[i-1][j] == "H") {
-							near += 1;
-						}
-						if ( (i+1) <=size & data[i+1][j] == "H"){
-							near +=1;
-						}
-						if ( (j-1) >= 0 && data[i][j-1] == "H") {
-							near += 1;
-						}
-						if ( (j+1) <=size & data[i][j+1] == "H"){
-							
-							near +=1;
-						}
-					}
-					//cell B
-					
-					if (data[i][j] == "B") {
-						if ( (i-1) >= 0 && data[i-1][j] == "H") {
-							near += 1;
-						}
-						if ( (i+1) <=size & data[i+1][j] == "H"){
-							near +=1;
-						}
-						if ( (j-1) >= 0 && data[i][j-1] == "H") {
-							near += 1;
-						}
-						if ( (j+1) <=size & data[i][j+1] == "H"){
-							
-							near +=1;
-						}
-						
-						if ( (i-2) >= 0 && data[i-2][j] == "H") {
-							near += 1;
-						}
-						if ( (i+2) <=size & data[i+2][j] == "H"){
-							near +=1;
-						}
-						if ( (j-2) >= 0 && data[i][j-2] == "H") {
-							near += 1;
-						}
-						if ( (j+2) <=size & data[i][j+2] == "H"){
-							
-							near +=1;
-						}
-					}
-					
-					//cell C
-					if (data[i][j] == "C") {
-						if ( (i-1) >= 0 && data[i-1][j] == "H") {
-							near += 1;
-						}
-						if ( (i+1) <=size & data[i+1][j] == "H"){
-							near +=1;
-						}
-						if ( (j-1) >= 0 && data[i][j-1] == "H") {
-							near += 1;
-						}
-						if ( (j+1) <=size & data[i][j+1] == "H"){
-							
-							near +=1;
-						}
-						
-						if ( (i-2) >= 0 && data[i-2][j] == "H") {
-							near += 1;
-						}
-						if ( (i+2) <=size & data[i+2][j] == "H"){
-							near +=1;
-						}
-						if ( (j-2) >= 0 && data[i][j-2] == "H") {
-							near += 1;
-						}
-						if ( (j+2) <=size & data[i][j+2] == "H"){
-							
-							near +=1;
-						}
-						
-						if ( (i-3) >= 0 && data[i-3][j] == "H") {
-							near += 1;
-						}
-						if ( (i+3) <=size & data[i+3][j] == "H"){
-							near +=1;
-						}
-						if ( (j-3) >= 0 && data[i][j-3] == "H") {
-							near += 1;
-						}
-						if ( (j+3) <=size & data[i][j+3] == "H"){
-							
-							near +=1;
-						}
-					}
-				}	
+				}
 			}
-			
-			System.out.println("TotalH: " +total_H);
-			result = total_H - near;
-			System.out.println("#" + T + " " + result);
-		} 
-	}
+			System.out.println("#" + t + " " + "House: " + foundMap.size());
+			// Second loop to filter house
+			for (int i = 0; i < size; i++) {
+				for (int j = 0; j < size; j++) {
+					// NOTE: Require java8 for remove (key, value) from Map
+					// TODO: Refactoring ugly pair (x,y)
+					switch (data[i][j]) {
+					case "A":
+						// Remove 4 near item of this point
+						// Ignore return data
+						foundMap.remove(i - 1, j);
+						foundMap.remove(i + 1, j);
+						foundMap.remove(i, j + 1);
+						foundMap.remove(i, j - 1);
+						break;
+					case "B":
+						foundMap.remove(i - 2, j);
+						foundMap.remove(i + 2, j);
+						foundMap.remove(i - 1, j);
+						foundMap.remove(i + 1, j);
 
+						foundMap.remove(i, j + 1);
+						foundMap.remove(i, j - 1);
+						foundMap.remove(i, j + 2);
+						foundMap.remove(i, j - 2);
+						break;
+					case "C":
+						foundMap.remove(i - 3, j);
+						foundMap.remove(i + 3, j);
+						foundMap.remove(i - 2, j);
+						foundMap.remove(i + 2, j);
+						foundMap.remove(i - 1, j);
+						foundMap.remove(i + 1, j);
+
+						foundMap.remove(i, j + 1);
+						foundMap.remove(i, j - 1);
+						foundMap.remove(i, j + 2);
+						foundMap.remove(i, j - 2);
+						foundMap.remove(i, j + 3);
+						foundMap.remove(i, j - 3);
+						break;
+					}
+				}
+
+				// System.out.println("TotalH: " + total_H);
+				// result = total_H - near;
+			}
+			System.out.println("#Free: " + foundMap.size());
+			System.out.println("#Detail: " +
+			// Detail position
+					foundMap.entrySet()
+							.stream()
+							.map(entry -> String.format("(%s, %s)",
+									entry.getKey(), entry.getValue()))
+							.collect(Collectors.joining(", ")));
+		}
+		sc.close();
+	}
 }
