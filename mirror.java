@@ -29,88 +29,124 @@ public class mirror {
 				
 			}
 			
-			int huong = 1;
 			
-			for (int row = 0; row < size; row++) {
-				for (int column = 0; column < size; column++) {
-					while (true) {
-						switch (huong) {
-							case 1:
-								if (data[row][column] == 2) {
-									row++;
-									times++;
+			int row =0, column= 0;
+			boolean cond = true;
+			int huong = 4;
+			while (cond) {
+				if (row < 0 || row >=size || column >= size || column < 0 ) {
+					//if (data[row][column] == 0) {
+					cond = false;
+				} else {
+				switch (huong) {
+					case 1:
+						
+							if (data[row][column] == 2) {
+								
+								System.out.println("Case1-2 "+"huong: "+huong);
+								column++;
+								times++;
 									
-									break;
-								} else {
-									huong = 1;
-								}
-								
-								if (data[row][column] == 1) {
-									column++;
-									times++;
-									break;
-								} else {
-									huong = 1;
-								}
+								huong = 4;
+								System.out.println("Case1-2 huong: "+huong);
+								break;
+							} else if (data[row][column] == 1) {
+										
+								System.out.println("Case1-1 huong: "+huong);
+								column--;
+								times++;
+										
+								huong = 2;
+								System.out.println("Case1-1 huong: "+huong);
+								break;
+							} else {
+								huong = 1;
+								column++;
+								break;
+							}
+						
+											
+					case 2:
+						
+							if (data[row][column] == 2) {
+								System.out.println("Case2-2 huong: "+huong);
+								row--;
+								times++;
 									
-							case 2:
-								if (data[row][column] == 2) {
-									column++;
-									times++;
-									break;
-								} else {
-									huong = 2;
-								}
+								huong = 3;
+								System.out.println("Case2-2 huong: "+huong);
+								break;
+							} else if (data[row][column] == 1) {
+								System.out.println("Case2-1 huong: "+huong);
+								row++;
+								times++;
+										
+								huong = 1;
+								System.out.println("Case2-1 huong: "+huong);
+								break;
+							} else {
+								huong = 2;
+								column--;
+								break;
+							} 
+						
 								
-								if (data[row][column] == 1) {
-									column--;
-									times++;
-									break;
-								} else {
-									huong = 2;
-								}
-								
+					case 3:
+						
+							if (data[row][column] == 2) {
+								System.out.println("Case3-2 huong: "+huong);
+								column--;
+								times++;
+									
+								huong = 2;
+								System.out.println("Case3-2 huong: "+huong);
+								break;
+							} else if (data[row][column] == 1) {
+								System.out.println("Case3-1 huong: "+huong);
+								column++;
+								times++;
+									
+								huong = 4;
+								System.out.println("Case3-1 huong: "+huong);
+								break;
+							} else {
+								huong = 3;
+								row--;
+								break;
+							}
+						
+						
+					case 4:
+						
+							if (data[row][column] == 2) {
+								System.out.println("Case4-2 huong: "+huong);
+								row++;
+								times++;
+									
+								huong = 1;
+								System.out.println("Case4-2 huong: "+huong);
+								break;
+							} else if (data[row][column] == 1) {
+								System.out.println("Case4-1 huong: "+huong);
+								row--;
+								times++;
+									
+								huong = 3;
+								System.out.println("Case4-1 huong: "+huong);
+								break;
+							} else {
+								huong = 4;
+								column++;
+								break;
+							}
 							
-							case 3:
-								if (data[row][column] == 2) {
-									row--;
-									times++;
-									break;
-								} else {
-									huong = 3;
-								}
-								
-								if (data[row][column] == 1) {
-									row++;
-									times++;
-									break;
-								} else {
-									huong = 3;
-								}
-								
-							case 4:
-								if (data[row][column] == 2) {
-									column++;
-									break;
-								} else {
-									huong = 4;
-								}
-								
-								if (data[row][column] == 1) {
-									column--;
-									times++;
-									break;
-								} else {
-									huong = 4;
-								}
-							
-						}	
-					
-					
-
-					}
+						
+						
+				}		
+							//}
 				}
 			}
+			
 			System.out.println("#" + t + " " + times);
 		}
 
