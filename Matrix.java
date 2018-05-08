@@ -92,6 +92,9 @@ public class Matrix {
 	}
 
 	public static long findMax(long[] matrix) {
+		// Review 1: It's time to upgrade to Java8 at least
+		// To have its advance
+		// return Arrays.asList(matrix).stream().max(Long::max).get();
 		long max = matrix[0];
 
 		for (int i = 1; i < matrix.length; i++) {
