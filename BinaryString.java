@@ -32,6 +32,8 @@ public class BinaryString {
 		for (int t = 1; t <= 10; t++) {
 			//i number=0;
 			int start = sc.nextInt();
+			// Review 4: No need to init value here but using directly
+			// String child = input.subString()
 			String child = "";
 			child += input.substring(start-1, start+6);
 			
@@ -42,8 +44,8 @@ public class BinaryString {
 	}
 	
 	public static String generateString(int N) {
+		// Review 1: Concat string using StringBuilder, not += operator
 		String input = "";
-		
 		for (int i = 1; i <= N; i++) {
 			input += Integer.toBinaryString(i);
 		}
@@ -53,7 +55,10 @@ public class BinaryString {
 	}
 	
 	//String s has length is 5
+	// Review 2: In this case, 5 should be put into parameter lik
+	// convertFromBinaryStringToInt(String s, int range)
 	public static int convertBinaryToInt(String s) {
+		// Review 3: Integer.valueOf has a method to support binary converter
 		int result = 0;
 		String [] cut = s.split("");
 		
